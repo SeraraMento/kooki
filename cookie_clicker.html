@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Clicker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .counter {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .cookie-btn {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #ffda59, #f4a300);
+            border: none;
+            cursor: pointer;
+            font-size: 60px;
+            transition: transform 0.1s, box-shadow 0.1s;
+            margin: 30px auto;
+            box-shadow: 0 8px 20px rgba(244, 163, 0, 0.4);
+        }
+
+        .cookie-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .cookie-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 4px 10px rgba(244, 163, 0, 0.3);
+        }
+
+        .improvements {
+            margin-top: 40px;
+            border-top: 2px solid #eee;
+            padding-top: 30px;
+        }
+
+        .improvements h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .improvement-item {
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            transition: all 0.3s;
+        }
+
+        .improvement-item:hover {
+            background: #efefef;
+            border-color: #667eea;
+        }
+
+        .improvement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .improvement-name {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .improvement-count {
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .improvement-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .improvement-price {
+            font-size: 1em;
+            color: #f4a300;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .btn-buy {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+
+        .btn-buy:hover {
+            background: #764ba2;
+        }
+
+        .btn-buy:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .auto-generation {
+            font-size: 0.9em;
+            color: #667eea;
+            margin-top: 20px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        .reset-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .reset-btn:hover {
+            background: #ee5a52;
+        }
+
+        .player-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+
+        .player-input-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .player-input-group input {
+            padding: 10px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 1em;
+            width: 200px;
+        }
+
+        .btn-submit-score {
+            background: #51cf66;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+
+        .btn-submit-score:hover {
+            background: #40c057;
+        }
+
+        .btn-reset-scores {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            transition: background 0.3s;
+        }
+
+        .btn-reset-scores:hover {
+            background: #ee5a52;
+        }
+
+        .leaderboard {
+            margin-top: 20px;
+        }
+
+        .leaderboard h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        .leaderboard-table th {
+            background: #667eea;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .leaderboard-table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        .leaderboard-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .leaderboard-table tr:hover {
+            background: #efefef;
+        }
+
+        .medal {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍪 Cookie Clicker</h1>
+        
+        <div class="counter">
+            Cookies: <span id="cookieCount">0</span>
+        </div>
+
+        <button class="cookie-btn" id="cookieBtn">🍪</button>
+
+        <div class="improvements">
+            <h2>Améliorations</h2>
+
+            <div class="improvement-item">
+                <div class="improvement-header">
+                    <div class="improvement-name">👵 Grand-mère</div>
+                    <div class="improvement-count">Acheté: <span id="grandmotherCount">0</span></div>
+                </div>
+                <div class="improvement-description">+2 cookies par clic</div>
+                <div class="improvement-price">Prix: <span id="grandmotherPrice">10</span> 🍪</div>
+                <button class="btn-buy" id="buyGrandmother">Acheter</button>
+            </div>
+
+            <div class="improvement-item">
+                <div class="improvement-header">
+                    <div class="improvement-name">⚙️ Usine</div>
+                    <div class="improvement-count">Acheté: <span id="factoryCount">0</span></div>
+                </div>
+                <div class="improvement-description">+1 cookie auto par seconde</div>
+                <div class="improvement-price">Prix: <span id="factoryPrice">50</span> 🍪</div>
+                <button class="btn-buy" id="buyFactory">Acheter</button>
+            </div>
+
+            <div class="auto-generation">
+                🤖 Auto-génération: <span id="autoPerSecond">0</span> cookies/sec
+            </div>
+        </div>
+
+        <button class="reset-btn" id="resetBtn">Réinitialiser le jeu</button>
+
+        <div class="player-section">
+            <h2>📊 Classement</h2>
+            <div class="player-input-group">
+                <input type="text" id="playerName" placeholder="Entrez votre pseudo" maxlength="20">
+                <button class="btn-submit-score" id="submitScoreBtn">Soumettre le score</button>
+            </div>
+            <div class="leaderboard">
+                <h3>Top Scores</h3>
+                <button class="btn-reset-scores" id="resetScoresBtn">Effacer le classement</button>
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Rang</th>
+                            <th>Pseudo</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="cookie_clicker.js"></script>
+</body>
+
+</html>

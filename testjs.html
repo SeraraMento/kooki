@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>no title</title>
+</head>
+
+<body>
+    <main>
+        <section class="form-container">
+            <form id="userForm">
+                <h2></h2>
+                <ul>
+                    <li>
+                        <p>ton nom</p><input type="text" id="name" required>
+                    </li>
+                    <li>
+                        <p>Ton mail ?</p><input type="email" id="email" required>
+                    </li>
+                    <li>
+                        <p>ton mdp</p><input type="password" id="password" required minlength="8">
+                    </li>
+                    <li>
+                        <p>J'accepte les termes et condition</p><input type="checkbox" id="terms" required>
+                    </li>
+                    <li><input type="submit" value="Valider"></li>
+                    <li><input type="reset" value="Réinitialiser"></li>
+                </ul>
+                <div id="message" style="color: green;"></div>
+            </form>
+</section>
+    <script src="script.js"></script>
+</body>
+
+</html>
