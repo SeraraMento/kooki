@@ -1,8 +1,9 @@
 {
-  "name": "cookie-clicker-server",
+  "name": "cookie-clicker-vercel",
   "version": "1.0.0",
-  "description": "Cookie Clicker multiplayer leaderboard server",
-  "main": "server.js",
+  "description": "Cookie Clicker multiplayer leaderboard on Vercel",
+  "type": "module",
+  "main": "api/scores.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js"
@@ -12,3 +13,4 @@
     "cors": "^2.8.5"
   }
 }
+
